@@ -1,6 +1,7 @@
 target/
 *.class
 *.log
+cp.txt
 
 # IDE
 .idea/
