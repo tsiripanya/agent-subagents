@@ -61,13 +61,33 @@ Checkstyle is configured in [`config/checkstyle.xml`](config/checkstyle.xml) and
 
 ## Run the demo
 
+### Run the tests
+
 ```bash
-mvn -q test
-mvn -q checkstyle:check
-mvn -q exec:java -Dexec.mainClass="com.demo.support.DemoApplication"
+mvn clean test
+```
+
+### Run Checkstyle
+
+```bash
+mvn checkstyle:check
+```
+
+### Run the application
+
+```bash
+mvn exec:java -Dexec.mainClass="com.demo.support.DemoApplication"
+```
+
+Or, to keep Maven output quiet while still seeing application logs:
+
+```bash
+mvn -q compile dependency:build-classpath -Dmdep.outputFile=cp.txt && java -cp "target/classes:$(cat cp.txt)" com.demo.support.DemoApplication
 ```
 
 `DemoApplication` runs the classifier against five sample tickets and logs the results through SLF4J.
+
+> **Note:** Avoid `mvn -q exec:java` — the `-q` flag can suppress SLF4J output, making it appear as if the application produced no results.
 
 ## Honest limitations
 
